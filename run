@@ -1,5 +1,19 @@
 #!/bin/bash
+# Get the directory of the script
 DIR="$(dirname "$0")"
 
-filename="$1"
-npx ts-node ./src/run.ts "$filename"
+# The command or filename passed as an argument
+command_or_file="$1"
+
+# Check if the command is 'install' or 'test'
+if [ "$command_or_file" == "install" ]; then
+    console.log("Installing")
+  # Handle the install command
+  npm install
+elif [ "$command_or_file" == "test" ]; then
+  # Handle the test command
+  npm test
+else
+  # Assume it's a filename and run the TypeScript file
+  npx ts-node "$DIR/src/run.ts" "$command_or_file"
+fi
